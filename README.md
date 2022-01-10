@@ -1,13 +1,14 @@
-## Inputs from Perforce
+# carbonio-db-conf
 
-- `./ZimbraServer/src/db/mysql`
-- `./ZimbraServer/src/db/migration`
-- `./Zimbraserver/src/db/sqlite`
-- `./ZimbraServer/src/db/mysql-cluster`
-- `./ZimbraServer/src/db/default-volumes.sql`
+![Contributors](https://img.shields.io/github/contributors/zextras/carbonio-db-conf "Contributors")
+![Activity](https://img.shields.io/github/commit-activity/m/zextras/carbonio-db-conf "Activity") ![License](https://img.shields.io/badge/license-AGPL%203-green
+"License")
+![Project](https://img.shields.io/badge/project-carbonio-informational
+"Project")
+[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/zextras.svg?style=social&label=Follow%20%40zextras)](https://twitter.com/zextras)
 
+Configuration structure for databases and migration scripts
 
+## License
 
-## Artifacts
-
-- `Everything under db/mysql or db/sqlite`
+See [COPYING](COPYING) file for details

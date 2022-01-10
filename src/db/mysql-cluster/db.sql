@@ -1,36 +1,26 @@
+-- SPDX-FileCopyrightText: 2021 Synacor, Inc.
+-- SPDX-FileCopyrightText: 2021 Zextras <https://www.zextras.com>
 --
--- ***** BEGIN LICENSE BLOCK *****
--- Zimbra Collaboration Suite Server
--- Copyright (C) 2013, 2014, 2016 Synacor, Inc.
---
--- This program is free software: you can redistribute it and/or modify it under
--- the terms of the GNU General Public License as published by the Free Software Foundation,
--- version 2 of the License.
---
--- This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
--- without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
--- See the GNU General Public License for more details.
--- You should have received a copy of the GNU General Public License along with this program.
--- If not, see <https://www.gnu.org/licenses/>.
--- ***** END LICENSE BLOCK *****
---
+-- SPDX-License-Identifier: AGPL-3.0-only
+-- SPDX-License-Identifier: GPL-2.0-only
+
 CREATE DATABASE zimbra;
 ALTER DATABASE zimbra DEFAULT CHARACTER SET utf8;
 
 USE zimbra;
 
-GRANT ALL ON zimbra.* TO 'zimbra' IDENTIFIED BY 'zimbra';
-GRANT ALL ON zimbra.* TO 'zimbra'@'localhost' IDENTIFIED BY 'zimbra';
-GRANT ALL ON zimbra.* TO 'zimbra'@'localhost.localdomain' IDENTIFIED BY 'zimbra';
-GRANT ALL ON zimbra.* TO 'root'@'localhost.localdomain' IDENTIFIED BY 'zimbra';
+GRANT ALL ON zimbra.* TO 'zextras' IDENTIFIED BY 'zextras';
+GRANT ALL ON zimbra.* TO 'zextras'@'localhost' IDENTIFIED BY 'zextras';
+GRANT ALL ON zimbra.* TO 'zextras'@'localhost.localdomain' IDENTIFIED BY 'zextras';
+GRANT ALL ON zimbra.* TO 'root'@'localhost.localdomain' IDENTIFIED BY 'zextras';
 
--- The zimbra user needs to be able to create and drop databases and perform
+-- The zextras user needs to be able to create and drop databases and perform
 -- backup and restore operations.  Give
 -- zimbra root access for now to keep things simple until there is a need
 -- to add more security.
-GRANT ALL ON *.* TO 'zimbra' WITH GRANT OPTION;
-GRANT ALL ON *.* TO 'zimbra'@'localhost' WITH GRANT OPTION;
-GRANT ALL ON *.* TO 'zimbra'@'localhost.localdomain' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'zextras' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'zextras'@'localhost' WITH GRANT OPTION;
+GRANT ALL ON *.* TO 'zextras'@'localhost.localdomain' WITH GRANT OPTION;
 GRANT ALL ON *.* TO 'root'@'localhost.localdomain' WITH GRANT OPTION;
 
 -- -----------------------------------------------------------------------
@@ -74,10 +64,10 @@ CREATE TABLE current_volumes (
 
 INSERT INTO volume (id, type, name, path, file_bits, file_group_bits,
     mailbox_bits, mailbox_group_bits, compress_blobs, compression_threshold)
-  VALUES (1, 1, 'message1', '/opt/zimbra/store', 12, 8, 12, 8, 0, 4096);
+  VALUES (1, 1, 'message1', '/opt/zextras/store', 12, 8, 12, 8, 0, 4096);
 INSERT INTO volume (id, type, name, path, file_bits, file_group_bits,
     mailbox_bits, mailbox_group_bits, compress_blobs, compression_threshold)
-  VALUES (2, 10, 'index1',   '/opt/zimbra/index', 12, 8, 12, 8, 0, 4096);
+  VALUES (2, 10, 'index1',   '/opt/zextras/index', 12, 8, 12, 8, 0, 4096);
 
 INSERT INTO current_volumes (message_volume_id, index_volume_id, next_mailbox_id) VALUES (1, 2, 1);
 COMMIT;

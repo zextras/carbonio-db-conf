@@ -1,19 +1,9 @@
-# 
-# ***** BEGIN LICENSE BLOCK *****
-# Zimbra Collaboration Suite Server
-# Copyright (C) 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2016 Synacor, Inc.
+# SPDX-FileCopyrightText: 2021 Synacor, Inc.
+# SPDX-FileCopyrightText: 2021 Zextras <https://www.zextras.com>
 #
-# This program is free software: you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free Software Foundation,
-# version 2 of the License.
-#
-# This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-# without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License along with this program.
-# If not, see <https://www.gnu.org/licenses/>.
-# ***** END LICENSE BLOCK *****
-# 
+# SPDX-License-Identifier: AGPL-3.0-only
+# SPDX-License-Identifier: GPL-2.0-only
+
 package Migrate;
 
 use strict;
@@ -26,14 +16,14 @@ use List::Util qw(min);
 #############
 
 my $MYSQL = "mysql";
-my $LOGMYSQL = "/opt/zimbra/bin/logmysql";
-my $DB_USER = "zimbra";
-my $DB_PASSWORD = "zimbra";
+my $LOGMYSQL = "/opt/zextras/bin/logmysql";
+my $DB_USER = "zextras";
+my $DB_PASSWORD = "zextras";
 my $LOGGER_DB_PASSWORD = "zimbra";
 my $DATABASE = "zimbra";
 my $LOGGER_DATABASE = "zimbra_logger";
-my $ZMLOCALCONFIG = "/opt/zimbra/bin/zmlocalconfig";
-my $ZMSOAP = "/opt/zimbra/bin/zmsoap";
+my $ZMLOCALCONFIG = "/opt/zextras/bin/zmlocalconfig";
+my $ZMSOAP = "/opt/zextras/bin/zmsoap";
 my $SQLLOGFH;
 my $DB_SOCKET;
 
@@ -42,7 +32,7 @@ if ($^O !~ /MSWin/i) {
     chomp $DB_PASSWORD;
     $DB_USER = `$ZMLOCALCONFIG -m nokey zimbra_mysql_user`;
     chomp $DB_USER;
-    $MYSQL = "/opt/zimbra/bin/mysql";
+    $MYSQL = "/opt/zextras/bin/mysql";
     $DB_SOCKET = `$ZMLOCALCONFIG -x -s -m nokey mysql_socket`;
     chomp $DB_SOCKET;
 }
@@ -318,7 +308,7 @@ sub runSqlParallel(@) {
       # set an alarm in case the command hangs.
       $SIG{ALRM} = sub { &alarm_handler($array,$timeout,$quiet) };
       alarm($timeout);
-      my $data_source = "dbi:mysql:database=$DATABASE;mysql_read_default_file=/opt/zimbra/conf/my.cnf;mysql_socket=$DB_SOCKET";
+      my $data_source = "dbi:mysql:database=$DATABASE;mysql_read_default_file=/opt/zextras/conf/my.cnf;mysql_socket=$DB_SOCKET";
       my $dbh;
       until ($dbh) {
         $dbh = DBI->connect($data_source, $DB_USER, $DB_PASSWORD, { PrintError => 0 }); 
@@ -406,12 +396,12 @@ sub log($) {
 sub logSql($) {
   my ($input) = @_;
   unless (defined($SQLLOGFH)) {
-    $SQLLOGFH = new FileHandle ">> /opt/zimbra/log/sqlMigration.log";
+    $SQLLOGFH = new FileHandle ">> /opt/zextras/log/sqlMigration.log";
     select $SQLLOGFH;
     $|=1;
     select STDOUT;
-    chmod 0644, "/opt/zimbra/log/sqlMigration.log";
-    `chown zimbra:zimbra /opt/zimbra/log/sqlMigration.log`;
+    chmod 0644, "/opt/zextras/log/sqlMigration.log";
+    `chown zextras:zextras /opt/zextras/log/sqlMigration.log`;
   }
   my $output = scalar(localtime()).": $input\n";
   print $SQLLOGFH $output;
