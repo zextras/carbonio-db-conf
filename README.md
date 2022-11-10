@@ -19,7 +19,7 @@ is a SQL template used by mailbox to create/provision a new mailbox (database na
 Migration logs are stored under /opt/zextras/log/sqlMigration.log.
 
 Scripts inside (e.g.: [src/db/migration](src/db/migration)) perform migration on existing databases \
-and are placed under /opt/zextras/libexec/scripts
+and are placed under /opt/zextras/libexec/scripts on product installation
 
 You can **manually** execute one by running (**TEST PURPOSES**):
 > cd /opt/zextras/libexec/scripts && perl -I. <migration_name>.pl
