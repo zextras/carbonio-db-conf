@@ -7,15 +7,11 @@
 # 
 
 #
-# Add Briefcase system folder (id = 16) to each mailbox.
+# Remove Briefcase system folder (id = 16) for each mailbox.
 #
 
 use strict;
 use Migrate;
-
-sub bumpUpMailboxChangeCheckpoints();
-sub renameExistingTasksFolder($$);
-sub createTasksFolder($);
 
 my $CONCURRENCY = 10;
 my $ID = 16;
