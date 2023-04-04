@@ -38,8 +38,8 @@ sub removeFolder($) {
     my ($mboxId, $gid) = @_;
 
     my $sql = <<_SQL_;
-DELETE FROM mboxgroup$gid.mail_item mi 
-WHERE mi.mailbox_id = $mboxId AND mi.folder_id = 1 AND mi.id = $ID AND mi.metadata = '$METADATA';
+DELETE FROM mboxgroup$gid.mail_item
+WHERE mailbox_id = $mboxId AND folder_id = 1 AND id = $ID AND metadata = '$METADATA';
 _SQL_
     return $sql;
 }
