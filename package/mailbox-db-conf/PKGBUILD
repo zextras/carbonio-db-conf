@@ -1,0 +1,30 @@
+targets=(
+  "centos"
+  "ubuntu"
+)
+pkgname="carbonio-mailbox-db-conf"
+pkgver="0.0.1"
+pkgrel="1"
+pkgdesc="Database configuration and migrations for the mailbox"
+pkgdesclong=(
+  "This package contains sql templates for the mailbox, as well migration files"
+)
+maintainer="Zextras <packages@zextras.com>"
+url="https://zextras.com"
+section="mail"
+priority="optional"
+arch="amd64"
+
+package() {
+  cd "${srcdir}"/../../staging
+
+  install -Ddm755 "${pkgdir}/opt/zextras/db/mailbox/migrations"
+  rsync -a src/db/migration/ \
+    "${pkgdir}/opt/zextras/db/mailbox/migrations"
+  install -D opt/zextras/db/create_database.sql \
+      "${pkgdir}/opt/zextras/db/mailbox/create_database.sql"
+  install -D opt/zextras/db/db.sql \
+    "${pkgdir}/opt/zextras/db/mailbox/db.sql"
+
+  echo `date +%s`": INSTALLED ${pkgname}" >> /opt/zextras/.install_history
+}
