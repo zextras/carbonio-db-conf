@@ -107,36 +107,3 @@ CREATE TABLE scheduled_task (
 );
 
 CREATE INDEX i_scheduled_task_mailbox_id ON scheduled_task(mailbox_id);
-
--- Mobile Devices
-CREATE TABLE mobile_devices (
-   mailbox_id          BIGINT UNSIGNED NOT NULL,
-   device_id           VARCHAR(64) NOT NULL,
-   device_type         VARCHAR(64) NOT NULL,
-   user_agent          VARCHAR(64),
-   protocol_version    VARCHAR(64),
-   provisionable       BOOLEAN NOT NULL DEFAULT 0,
-   status              TINYINT UNSIGNED NOT NULL DEFAULT 0,
-   policy_key          INTEGER UNSIGNED,
-   recovery_password   VARCHAR(64),
-   first_req_received  INTEGER UNSIGNED NOT NULL,
-   last_policy_update  INTEGER UNSIGNED,
-   remote_wipe_req     INTEGER UNSIGNED,
-   remote_wipe_ack     INTEGER UNSIGNED,
-   policy_values       VARCHAR(512),
-   last_used_date      DATE,
-   deleted_by_user     BOOLEAN NOT NULL DEFAULT 0,
-   model               VARCHAR(64),
-   imei                VARCHAR(64),
-   friendly_name       VARCHAR(512),
-   os                  VARCHAR(64),
-   os_language         VARCHAR(64),
-   phone_number        VARCHAR(64),
-   unapproved_appl_list TEXT NULL,
-   approved_appl_list   TEXT NULL,
-
-   PRIMARY KEY (mailbox_id, device_id),
-   CONSTRAINT fk_mobile_mailbox_id FOREIGN KEY (mailbox_id) REFERENCES mailbox(id) ON DELETE CASCADE
-);
-
-CREATE INDEX i_mobile_devices_last_used_date ON mobile_devices(last_used_date);
