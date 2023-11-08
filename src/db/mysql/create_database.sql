@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS ${DATABASE_NAME}.mail_item (
    INDEX i_index_id (mailbox_id, index_id),  -- for looking up based on search results
    INDEX i_date (mailbox_id, date),          -- fallback index in case other constraints are not specified
    INDEX i_mod_metadata (mailbox_id, mod_metadata),      -- used by the sync code
-   INDEX i_locator (mailbox_id, locator),      -- used in HSM and CoherencyCheck operations
+   INDEX i_locator (mailbox_id, locator (255)),      -- used in HSM and CoherencyCheck operations
    INDEX i_uuid (mailbox_id, uuid),          -- for looking up by uuid 
 
    UNIQUE INDEX i_name_folder_id (mailbox_id, folder_id, name),   -- for namespace uniqueness
