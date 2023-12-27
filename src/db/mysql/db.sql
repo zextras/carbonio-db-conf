@@ -2,7 +2,6 @@
 -- SPDX-FileCopyrightText: 2021 Zextras <https://www.zextras.com>
 --
 -- SPDX-License-Identifier: GPL-2.0-only
--- SPDX-License-Identifier: GPL-2.0-only
 
 CREATE DATABASE zimbra;
 ALTER DATABASE zimbra DEFAULT CHARACTER SET utf8;
